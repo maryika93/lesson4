@@ -1,5 +1,5 @@
 <?php
-$url = 'http://api.openweathermap.org/data/2.5/weather?q=Omsk,ru&APPID=1493baecbc388deebfa091b42ae63850';
+$url = 'http://api.openweathermap.org/data/2.5/weather?q=Omsk,ru&units=metric&APPID=1493baecbc388deebfa091b42ae63850';
 $content = file_get_contents($url);
 $cont_arr = json_decode($content,true);
 echo '<pre>';
