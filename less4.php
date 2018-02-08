@@ -1,36 +1,52 @@
 <?php
-    $url = 'http://api.openweathermap.org/data/2.5/weather?q=Omsk,ru&units=metric&APPID=1493baecbc388deebfa091b42ae63850';
-    $content = file_get_contents($url);
-    $cont_arr = json_decode($content,true);
 
-        echo '<pre>';
-        print_r($cont_arr);
+$cityurl = 'Omsk';
+$metric = 'units=metric';
+$key = '1493baecbc388deebfa091b42ae63850';
+$url = 'http://api.openweathermap.org/data/2.5/weather?q='.$cityurl.',ru&'.$metric.'&APPID='.$key;
+$content = file_get_contents($url);
+$cont_arr = json_decode($content,true);
 
-    $n = $cont_arr['name'];
-    $tmain = $cont_arr["main"];
-    $t = $tmain["temp"];
-    $c = $cont_arr["weather"]["0"]["description"];
-    $c_all = $cont_arr["clouds"]["all"];
-    $p = $tmain["pressure"];
-    $h = $tmain["humidity"];
-    $w = $cont_arr["wind"]["speed"];
-    $wd = $cont_arr["wind"]["deg"];
+$n = $cont_arr['name'];
+$tmain = $cont_arr["main"];
+$t = $tmain["temp"];
+$c = $cont_arr["weather"]["0"]["description"];
+$c_all = $cont_arr["clouds"]["all"];
+$p = $tmain["pressure"];
+$h = $tmain["humidity"];
+$w = $cont_arr["wind"]["speed"];
 
-    $City = 'The weather in '.$n.'.';
-    $Weather = 'Temperature: '.$t.' °C. ';
-    $Cloud = 'Clouds: '.$c.' '.$c_all.'. ';
-    $press = 'Pressure: '.$p.' Па. ';
-    $hum = 'Humidity: '.$h.'. ';
-    $wind = 'Wind: '.$w. ' m/s. ';
-    $wind_deg = 'Wind deg: '.$wd.'.';
+$City = 'The weather in '.$n.'.';
+$Weather = $t.' °C. ';
+$Cloud = $c.' '.$c_all.'. ';
+$press = $p.' Па. ';
+$hum = $h.'. ';
+$wind = $w. ' m/s. ';
 
-        echo '<pre>';
-        print_r($City);
-        print_r($Weather);
-        print_r($Cloud);
-        print_r($press);
-        print_r($hum);
-        print_r($wind);
-        print_r($wind_deg);
 ?>
+
+<h1><?= $City ?></h1>
+<table>
+    <tr>
+        <td>Temperature:</td>
+        <td><?= $Weather ?></td>
+    </tr>
+    <tr>
+        <td>Clouds:</td>
+        <td><?= $Cloud ?></td>
+    </tr>
+    <tr>
+        <td>Pressure:</td>
+        <td><?= $press ?></td>
+    </tr>
+    <tr>
+        <td>Humidity:</td>
+        <td><?= $hum ?></td>
+    </tr>
+    <tr>
+        <td>Wind:</td>
+        <td><?= $wind ?></td>
+</table>
+
+
 
