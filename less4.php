@@ -7,6 +7,28 @@ $url = 'http://api.openweathermap.org/data/2.5/weather?q='.$cityurl.',ru&'.$metr
 $content = file_get_contents($url);
 $cont_arr = json_decode($content,true);
 
+$filename = 'D:\netology\lesson4\less4.json';
+$jsonfile = fopen($filename, "w");
+fwrite($jsonfile, $content);
+fclose($jsonfile);
+
+if (file_exists($filename)) {
+    $gg = date("G", filectime($filename));
+    $data = date("G");
+    if ($gg<=$data+1) {
+        $content = file_get_contents($filename);
+        $cont_arr = json_decode($content,true);
+    }
+    else{
+        $content = file_get_contents($url);
+        $cont_arr = json_decode($content,true);
+        $filename = 'D:\netology\lesson4\less4.json';
+        $jsonfile = fopen($filename, "w");
+        fwrite($jsonfile, $content);
+        fclose($jsonfile);
+    }
+}
+
 $n = $cont_arr['name'];
 $tmain = $cont_arr["main"];
 $t = $tmain["temp"];
